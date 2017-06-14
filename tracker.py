@@ -1,7 +1,13 @@
 from requests import get
-import tweepy
 from json import loads
+from config import *
+import tweepy
 import time
+
+# authorization from values inputted earlier, do not change.
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+api = tweepy.API(auth)
 
 btc = ('BTC', 'https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,EUR')
 eth = ('ETH', 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR')
@@ -19,9 +25,14 @@ def monitor():
 		sleep(60)
 		new_btc_price, new_eth_price = get_prices()
 	# send tweet when it breaks out, then restart.
-	tweet_api.update_status('Change in price! \n\nBTC: {} USD, {}\nETH: {},{}'.format(new_btc_price['USD'], new_btc_price['EUR'], new_eth_price['USD'], new_eth_price['EUR']))
+	api.update_status('Change in price! \n\nBTC: {} USD, {}\nETH: {},{}'.format(new_btc_price['USD'], new_btc_price['EUR'], new_eth_price['USD'], new_eth_price['EUR']))
 	monitor()
+
+def first_tweet():
+	btc_price, eth_price = get_prices()
+	api.update_status('Prices! \n\nBTC: {} USD, {}\nETH: {},{}'.format(btc_price['USD'], btc_price['EUR'], eth_price['USD'], eth_price['EUR']))
 
 
 if __name__ == "__main__":
+	first_tweet()
 	monitor()
