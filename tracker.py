@@ -50,8 +50,8 @@ if __name__ == "__main__":
 
 # if you want the monitor to tweet every minute, comment the above if __name__ == "__main__"
 # then uncomment this
-if __name__ == "__main__":
-	print('Tweeting price every minute.')
-	tweet_every_minute()
+# if __name__ == "__main__":
+# 	print('Tweeting price every minute.')
+# 	tweet_every_minute()
 
 
