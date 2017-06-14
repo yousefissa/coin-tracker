@@ -26,13 +26,16 @@ def monitor():
 		new_btc_price, new_eth_price = get_prices()
 	# send tweet when it breaks out, then restart.
 	api.update_status('Change in price! \n\nBTC: {} USD, {}\nETH: {},{}'.format(new_btc_price['USD'], new_btc_price['EUR'], new_eth_price['USD'], new_eth_price['EUR']))
+	print('Price change tweeted!')
 	monitor()
 
+# tweet price initially
 def first_tweet():
 	btc_price, eth_price = get_prices()
 	api.update_status('Prices! \n\nBTC: {} USD, {}\nETH: {},{}'.format(btc_price['USD'], btc_price['EUR'], eth_price['USD'], eth_price['EUR']))
-
+	print('Initial price tweeted!')
 
 if __name__ == "__main__":
+	print('Coin monitor started!')
 	first_tweet()
 	monitor()
