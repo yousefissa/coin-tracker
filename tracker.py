@@ -33,12 +33,10 @@ def monitor():
 def first_tweet():
 	btc_price, eth_price = get_prices()
 	api.update_status('Prices! \n\nBTC: {} USD, {} EUR\nETH: {} USD, {} EUR'.format(btc_price['USD'], btc_price['EUR'], eth_price['USD'], eth_price['EUR']))
-	print('Initial price tweeted!')
 
 # someone asked me to have the monitor tweet every minute. 
 def tweet_every_minute():
-	btc_price, eth_price = get_prices()
-	api.update_status('Prices! \n\nBTC: {} USD, {} EUR\nETH: {} USD, {} EUR'.format(btc_price['USD'], btc_price['EUR'], eth_price['USD'], eth_price['EUR']))
+	first_tweet()
 	sleep(60)
 	tweet_every_minute()
 
